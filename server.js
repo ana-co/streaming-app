@@ -13,7 +13,7 @@ const __dirname = dirname(__filename);
 import fs from 'fs';
 import mongodb from 'mongodb';
 
-import connectDB from './db/connect.js';
+import connectDB from './db/mongo_connect';
 
 dotenv.config();
 
