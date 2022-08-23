@@ -13,7 +13,7 @@ const __dirname = dirname(__filename);
 import fs from 'fs';
 import mongodb from 'mongodb';
 
-import connectDB from './db/mongo_connect';
+import connectMongoDB from './db/mongo_connect';
 
 dotenv.config();
 
@@ -122,7 +122,7 @@ const port = process.env.PORT || 5000;
 
 const start = async () => {
   try {
-    await connectDB(process.env.MONGO_URL);
+    await connectMongoDB();
     app.listen(port, () => {
       console.log(`Server is listening on port ${port}...`);
     });
