@@ -1,31 +1,13 @@
-import pg from 'pg';
-const { Client } = pg;
+import { Sequelize } from 'sequelize';
 
-import dotenv from 'dotenv';
-dotenv.config();
+import { createModels } from '../models/index.js';
 
 const connectDB = async () => {
-  // try {
-  const client = new Client({
-    user: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    database: process.env.PG_DATABASE,
-    password: process.env.PG_PASSWORD,
-    port: 5432,
-    ssl: { rejectUnauthorized: false },
-  });
+  const sequelize = new Sequelize(process.env.PG_URL);
 
-  await client.connect();
+  createModels(sequelize);
 
-  //   console.log('Connected to Postgresql!');
-
-  //   const res = await client.query('SELECT * FROM nftitem');
-  //   console.log(res);
-  //   await client.end();
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  console.log('PostgresDb Connected');
 };
 
-// connectDB();
 export default connectDB;
