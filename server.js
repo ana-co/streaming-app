@@ -1,6 +1,6 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
-
+import cors from 'cors';
 import dotenv from 'dotenv';
 
 import path from 'path';
@@ -20,6 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get('/', (req, res) => {
   //   res.json({ msg: 'NODE WELCOME!' });
@@ -27,8 +28,10 @@ app.get('/', (req, res) => {
 });
 
 import mediaRouter from './routes/api/media.js';
+import authRouter from './routes/api/metamaskAuth.js';
 
 app.use('/api/media', mediaRouter);
+app.use('/api/auth', authRouter);
 
 const port = process.env.PORT || 5000;
 
