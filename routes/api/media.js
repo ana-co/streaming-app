@@ -1,17 +1,17 @@
 import express from 'express';
-// import authenticateUser from '../../middleware/auth.js';
-
-const router = express.Router();
-
 import { StatusCodes } from 'http-status-codes';
 
 import { createReadStream } from 'streamifier';
 import mongodb, { ObjectId } from 'mongodb';
 
-// @route  GET/api/media
+import authenticateUser from '../../middleware/auth.js';
+
+const router = express.Router();
+
+// @route  GET /api/media
 // @desc   Stream media file by media file id
 // access  Private
-router.get('/', async (req, res) => {
+router.get('/', authenticateUser, async (req, res) => {
   //   const mediaFileId = req.query.mediaFileId;
   const mediaFileId = '6309066707c50f17af83887f';
   try {
@@ -73,7 +73,7 @@ router.get('/', async (req, res) => {
 // @route    POST api/media
 // @desc     Upload media file
 // @access   Private
-router.post('/', async (req, res) => {
+router.post('/', authenticateUser, async (req, res) => {
   const mediaFile = req.files.mediaFile;
   const filename = mediaFile.name.split('.').slice(0, -1).join('.');
 

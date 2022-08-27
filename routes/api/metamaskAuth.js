@@ -35,7 +35,7 @@ router.get('/:address/nonce', async (req, res) => {
 });
 
 // @route  POST /api/auth/:address/signature
-// @desc   Verify the signature
+// @desc   Verify the signature and generate jwt token
 // access  Public
 router.post('/:address/signature', async (req, res) => {
   const walletAddress = req.params.address;
@@ -75,7 +75,11 @@ router.post('/:address/signature', async (req, res) => {
     user.nonce = Math.floor(Math.random() * 1000000);
     await user.save();
 
-    res.status(StatusCodes.OK);
+    const token = user.createJWT();
+
+    res.status(StatusCodes.OK).json({
+      token: `Bearer ${token}`,
+    });
   } catch (err) {
     console.log(`Error: ${err}`);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
