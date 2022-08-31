@@ -12,8 +12,8 @@ const router = express.Router();
 // @desc   Stream media file by media file id
 // access  Private
 router.get('/', authenticateUser, async (req, res) => {
-  //   const mediaFileId = req.query.mediaFileId;
-  const mediaFileId = '6309066707c50f17af83887f';
+  const mediaFileId = req.query.mediaFileId;
+  // const mediaFileId = '6309066707c50f17af83887f';
   try {
     mongodb.MongoClient.connect(
       process.env.MONGO_URL,
