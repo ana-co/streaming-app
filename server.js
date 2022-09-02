@@ -22,9 +22,12 @@ app.use(fileUpload());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get('/', (req, res) => {
-  //   res.json({ msg: 'NODE WELCOME!' });
+app.get('/tst', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
+});
+
+app.get('/', (req, res) => {
+  res.json({ msg: 'WELCOME TO HACIENDA!' });
 });
 
 import mediaRouter from './routes/api/media.js';
