@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server",
+    "install-server": "npm install",
+    "install-dependencies": "npm run install-server ",
+    "start": "npm run server",
     "server": "nodemon server"
   },
   "author": "",
@@ -34,5 +36,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
   }
 }
