@@ -1,6 +1,7 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import moment from 'moment';
 import { createReadStream } from 'streamifier';
 import mongodb, { ObjectId } from 'mongodb';
 
@@ -15,7 +16,21 @@ router.get(
   '/',
   /*authenticateUser,*/ async (req, res) => {
     const mediaFileId = req.query.mediaFileId;
-    // const mediaFileId = '6309066707c50f17af83887f';
+    const rentExpireDate = req.query.rentExpireDate;
+    // const mediaFileId = '631758e2f353743769a65d18';
+    // const rentExpireDate = moment({
+    //   year: 2022,
+    //   month: 8,
+    //   day: 6,
+    //   hour: 19,
+    //   minute: 40,
+    // });
+    if (moment().isAfter(rentExpireDate)) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'Rent time expired' });
+    }
+
     try {
       mongodb.MongoClient.connect(
         process.env.MONGO_URL,
