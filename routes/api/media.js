@@ -25,7 +25,8 @@ router.get(
     //   hour: 19,
     //   minute: 40,
     // });
-    if (moment().isAfter(rentExpireDate)) {
+    // console.log(`rentExpireDate: ${rentExpireDate}`);
+    if (rentExpireDate && moment().isAfter(rentExpireDate)) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: 'Rent time expired' });
