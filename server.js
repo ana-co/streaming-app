@@ -27,7 +27,7 @@ app.get('/tst', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.json('WELCOME TO HACIENDA!');
+  res.json('WELCOME TO HACIENNDA!');
 });
 
 import mediaRouter from './routes/api/media.js';
